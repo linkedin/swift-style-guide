@@ -697,14 +697,18 @@ doSomethingWithClosure() { (response: NSURLResponse) -> String in
 }
 ```
 
-* **3.8.3** If specifying a closure as a type, you don’t need to wrap it in parentheses unless it is required (e.g. if the type is optional or the closure is within another closure). Note that using `Void` is preferred to using `()` because the `()` can become difficult to read once wrapped in multiple sets of parentheses.
+* **3.8.3** If specifying a closure as a type, you don’t need to wrap it in parentheses unless it is required (e.g. if the type is optional or the closure is within another closure). Always wrap the arguments in the closure in a set of parentheses - use `()` to indicate no arguments and use `Void` to indicate that nothing is returned.
 
 ```swift
-let completionBlock: Void -> Void = {
+let completionBlock: (success: Bool) -> Void = {
+    print("Success? \(success)")
+}
+
+let completionBlock: () -> Void = {
     print("Completed!")
 }
 
-let completionBlock: (Void -> Void)? = nil
+let completionBlock: (() -> Void)? = nil
 ```
 
 * **3.8.4** Keep parameter names on same line as the opening brace for closures when possible without too much horizontal overflow (i.e. ensure lines are less than 160 characters).
