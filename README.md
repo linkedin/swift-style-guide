@@ -4,7 +4,7 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Swift 2.2 on 6/21/2016.
+This guide was last updated for Swift 2.2 on 7/20/2016.
 
 ## Table Of Contents
 
@@ -172,7 +172,7 @@ if x == firstReallyReallyLongPredicateFunction()
 
 * **2.2** Use `PascalCase` for type names (e.g. `struct`, `enum`, `class`, `typedef`, `associatedtype`, etc.).
 
-* **2.3** Use `camelCase` (initial lowercase letter) for function, method, variable, constant, argument names, etc.).
+* **2.3** Use `camelCase` (initial lowercase letter) for function, method, variable, constant, argument names, enum cases, etc.).
 
 * **2.4** When dealing with an acronym or other name that is usually written in all caps, actually use all caps in any names that use this in code. The exception is if this word is at the start of a name that needs to start with lowercase - in this case, use all lowercase for the acronym.
 
