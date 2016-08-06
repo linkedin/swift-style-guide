@@ -112,8 +112,8 @@ func myFunctionWithManyParameters(parameterOne: String,
 }
 
 // Xcode indentation for a multi-line `if` statement
-if myFirstProperty > (mySecondProperty + myThirdProperty)
-    && myFourthProperty == .SomeEnumValue {
+if myFirstValue > (mySecondValue + myThirdValue)
+    && myFourthValue == .someEnumValue {
 
     // Xcode indents to here for this kind of statement
     print("Hello, World!")
@@ -147,7 +147,7 @@ someFunctionWithABunchOfArguments(
     })
 ```
 
-* **1.12** Prefer using local variables or constants or other mitigation techniques to avoid multi-line predicates where possible.
+* **1.12** Prefer using local constants or other mitigation techniques to avoid multi-line predicates where possible.
 
 ```swift
 // PREFERRED
@@ -177,7 +177,7 @@ if x == firstReallyReallyLongPredicateFunction()
 * **2.4** When dealing with an acronym or other name that is usually written in all caps, actually use all caps in any names that use this in code. The exception is if this word is at the start of a name that needs to start with lowercase - in this case, use all lowercase for the acronym.
 
 ```swift
-// "HTML" is at the start of a constant or variable name, so we use lowercase "html"
+// "HTML" is at the start of a constant name, so we use lowercase "html"
 let htmlBodyContent: String = "<p>Hello, World!</p>"
 // Prefer using ID to Id
 let profileID: Int = 1
@@ -379,7 +379,7 @@ for integer in [4, 8, 15, 16, 23, 42] {
 }
 ```
 
-* **3.1.3** Prefer not declaring types for properties, constants, or variables if they can be inferred anyway.
+* **3.1.3** Prefer not declaring types for constants or variables if they can be inferred anyway.
 
 * **3.1.4** If a function returns multiple values, prefer returning a tuple to using `inout` arguments (it’s best to use labeled tuples for clarity on what you’re returning if it is not otherwise obvious). If you use a certain tuple more than once, consider using a `typealias`. If you’re returning 3 or more items in a tuple, consider using a `struct` or `class` instead.
 
