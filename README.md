@@ -4,7 +4,7 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Swift 2.2 on 7/20/2016.
+This guide was last updated for Swift 2.2 on 08/06/2016.
 
 ## Table Of Contents
 
@@ -51,7 +51,7 @@ class SomeClass {
 }
 ```
 
-* **1.6** When writing a type for a property, a key for a dictionary, a function argument, a protocol conformance, or a superclass, don't add a space before the colon.
+* **1.6** When writing a type for a property, constant, variable, a key for a dictionary, a function argument, a protocol conformance, or a superclass, don't add a space before the colon.
 
 ```swift
 // specifying type
@@ -112,8 +112,8 @@ func myFunctionWithManyParameters(parameterOne: String,
 }
 
 // Xcode indentation for a multi-line `if` statement
-if myFirstProperty > (mySecondProperty + myThirdProperty)
-    && myFourthProperty == .SomeEnumValue {
+if myFirstValue > (mySecondValue + myThirdValue)
+    && myFourthValue == .someEnumValue {
 
     // Xcode indents to here for this kind of statement
     print("Hello, World!")
@@ -147,7 +147,7 @@ someFunctionWithABunchOfArguments(
     })
 ```
 
-* **1.12** Prefer using local properties or other mitigation techniques to avoid multi-line predicates where possible.
+* **1.12** Prefer using local constants or other mitigation techniques to avoid multi-line predicates where possible.
 
 ```swift
 // PREFERRED
@@ -172,12 +172,12 @@ if x == firstReallyReallyLongPredicateFunction()
 
 * **2.2** Use `PascalCase` for type names (e.g. `struct`, `enum`, `class`, `typedef`, `associatedtype`, etc.).
 
-* **2.3** Use `camelCase` (initial lowercase letter) for function, method, property, constant, argument names, enum cases, etc.).
+* **2.3** Use `camelCase` (initial lowercase letter) for function, method, property, constant, variable, argument names, enum cases, etc.).
 
 * **2.4** When dealing with an acronym or other name that is usually written in all caps, actually use all caps in any names that use this in code. The exception is if this word is at the start of a name that needs to start with lowercase - in this case, use all lowercase for the acronym.
 
 ```swift
-// "HTML" is at the start of a property name, so we use lowercase "html"
+// "HTML" is at the start of a constant name, so we use lowercase "html"
 let htmlBodyContent: String = "<p>Hello, World!</p>"
 // Prefer using ID to Id
 let profileID: Int = 1
@@ -250,7 +250,7 @@ class RoundAnimating: UIButton {
 }
 ```
 
-* **2.9** Include type information in property names when it is not obvious otherwise.
+* **2.9** Include type information in constant or variable names when it is not obvious otherwise.
 
 ```swift
 // PREFERRED
@@ -379,7 +379,7 @@ for integer in [4, 8, 15, 16, 23, 42] {
 }
 ```
 
-* **3.1.3** Prefer not declaring types for properties or constants if they can be inferred anyway.
+* **3.1.3** Prefer not declaring types for constants or variables if they can be inferred anyway.
 
 * **3.1.4** If a function returns multiple values, prefer returning a tuple to using `inout` arguments (it’s best to use labeled tuples for clarity on what you’re returning if it is not otherwise obvious). If you use a certain tuple more than once, consider using a `typealias`. If you’re returning 3 or more items in a tuple, consider using a `struct` or `class` instead.
 
@@ -590,10 +590,10 @@ weak var parentViewController: UIViewController!
 unowned var parentViewController: UIViewController
 ```
 
-* **3.5.5** When unwrapping optionals, use the same name for the unwrapped property where appropriate.
+* **3.5.5** When unwrapping optionals, use the same name for the unwrapped constant or variable where appropriate.
 
 ```
-guard let myProperty = myProperty else {
+guard let myValue = myValue else {
     return
 }
 ```
