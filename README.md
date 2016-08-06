@@ -51,7 +51,7 @@ class SomeClass {
 }
 ```
 
-* **1.6** When writing a type for a variable, a key for a dictionary, a function argument, a protocol conformance, or a superclass, don't add a space before the colon.
+* **1.6** When writing a type for a property, a key for a dictionary, a function argument, a protocol conformance, or a superclass, don't add a space before the colon.
 
 ```swift
 // specifying type
@@ -112,8 +112,8 @@ func myFunctionWithManyParameters(parameterOne: String,
 }
 
 // Xcode indentation for a multi-line `if` statement
-if myFirstVariable > (mySecondVariable + myThirdVariable)
-    && myFourthVariable == .SomeEnumValue {
+if myFirstProperty > (mySecondProperty + myThirdProperty)
+    && myFourthProperty == .SomeEnumValue {
 
     // Xcode indents to here for this kind of statement
     print("Hello, World!")
@@ -126,7 +126,7 @@ if myFirstVariable > (mySecondVariable + myThirdVariable)
 someFunctionWithManyArguments(
     firstArgument: "Hello, I am a string",
     secondArgument: resultFromSomeFunction()
-    thirdArgument: someOtherLocalVariable)
+    thirdArgument: someOtherLocalProperty)
 ```
 
 * **1.11** When dealing with an implicit array or dictionary large enough to warrant splitting it into multiple lines, treat the `[` and `]` as if they were braces in a method, `if` statement, etc. Closures in a method should be treated similarly.
@@ -147,7 +147,7 @@ someFunctionWithABunchOfArguments(
     })
 ```
 
-* **1.12** Prefer using local variables or other mitigation techniques to avoid multi-line predicates where possible.
+* **1.12** Prefer using local properties or other mitigation techniques to avoid multi-line predicates where possible.
 
 ```swift
 // PREFERRED
@@ -172,12 +172,12 @@ if x == firstReallyReallyLongPredicateFunction()
 
 * **2.2** Use `PascalCase` for type names (e.g. `struct`, `enum`, `class`, `typedef`, `associatedtype`, etc.).
 
-* **2.3** Use `camelCase` (initial lowercase letter) for function, method, variable, constant, argument names, enum cases, etc.).
+* **2.3** Use `camelCase` (initial lowercase letter) for function, method, property, constant, argument names, enum cases, etc.).
 
 * **2.4** When dealing with an acronym or other name that is usually written in all caps, actually use all caps in any names that use this in code. The exception is if this word is at the start of a name that needs to start with lowercase - in this case, use all lowercase for the acronym.
 
 ```swift
-// "HTML" is at the start of a variable name, so we use lowercase "html"
+// "HTML" is at the start of a property name, so we use lowercase "html"
 let htmlBodyContent: String = "<p>Hello, World!</p>"
 // Prefer using ID to Id
 let profileID: Int = 1
@@ -273,7 +273,7 @@ class ConnectionTableViewCell: UITableViewCell {
     let popupTableViewController: UITableViewController
 
     // when working with outlets, make sure to specify the outlet type in the
-    // variable name.
+    // property name.
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var nameLabel: UILabel!
@@ -304,16 +304,16 @@ class ConnectionTableViewCell: UITableViewCell {
     // `VC` instead of `ViewController`
     let popupVC: UIViewController
 
-    // even though this is still technically a `UIViewController`, this variable
+    // even though this is still technically a `UIViewController`, this property
     // should indicate that we are working with a *Table* View Controller
     let popupViewController: UITableViewController
 
     // for the sake of consistency, we should put the type name at the end of the
-    // variable name and not at the start
+    // property name and not at the start
     @IBOutlet weak var btnSubmit: UIButton!
     @IBOutlet weak var buttonSubmit: UIButton!
 
-    // we should always have a type in the variable name when dealing with outlets
+    // we should always have a type in the property name when dealing with outlets
     // for example, here, we should have `firstNameLabel` instead
     @IBOutlet weak var firstName: UILabel!
 }
@@ -379,7 +379,7 @@ for integer in [4, 8, 15, 16, 23, 42] {
 }
 ```
 
-* **3.1.3** Prefer not declaring types for variable or constants if they can be inferred anyway.
+* **3.1.3** Prefer not declaring types for properties or constants if they can be inferred anyway.
 
 * **3.1.4** If a function returns multiple values, prefer returning a tuple to using `inout` arguments (it’s best to use labeled tuples for clarity on what you’re returning if it is not otherwise obvious). If you use a certain tuple more than once, consider using a `typealias`. If you’re returning 3 or more items in a tuple, consider using a `struct` or `class` instead.
 
@@ -499,11 +499,11 @@ class Pirate {
 
 * **3.2.3** In general, do not write the `internal` access modifier keyword since it is the default.
 
-* **3.2.4** If a variable needs to be accessed by unit tests, you will have to make it `internal` to use `@testable import ModuleName`. If a variable *should* be private, but you declare it to be `internal` for the purposes of unit testing, make sure you add an appropriate bit of documentation commenting that explains this. You can make use of the `- warning:` markup syntax for clarity as shown below.
+* **3.2.4** If a property needs to be accessed by unit tests, you will have to make it `internal` to use `@testable import ModuleName`. If a property *should* be private, but you declare it to be `internal` for the purposes of unit testing, make sure you add an appropriate bit of documentation commenting that explains this. You can make use of the `- warning:` markup syntax for clarity as shown below.
 
 ```swift
 /**
- This variable defines the pirate's name.
+ This property defines the pirate's name.
  - warning: Not `private` for `@testable`.
  */
 let pirateName = "LeChuck"
@@ -561,7 +561,7 @@ func handleDigit(digit: Int) throws {
 
 ### 3.5 Optionals
 
-* **3.5.1** The only time you should be using implicitly unwrapped optionals is with `@IBOutlet`s. In every other case, it is better to use a non-optional or regular optional variable. Yes, there are cases in which you can probably "guarantee" that the variable will never be `nil` when used, but it is better to be safe and consistent.
+* **3.5.1** The only time you should be using implicitly unwrapped optionals is with `@IBOutlet`s. In every other case, it is better to use a non-optional or regular optional property. Yes, there are cases in which you can probably "guarantee" that the property will never be `nil` when used, but it is better to be safe and consistent.
 
 * **3.5.2** Don't use `as!` or `try!`.
 
@@ -579,7 +579,7 @@ if let _ = someOptional {
 }
 ```
 
-* **3.5.4** Don't use `unowned`. You can think of `unowned` as somewhat of an equivalent of a `weak` variable that is implicitly unwrapped (though `unowned` has slight performance improvements on account of completely ignoring reference counting). Since we don't ever want to have implicit unwraps, we similarly don't want `unowned` variables.
+* **3.5.4** Don't use `unowned`. You can think of `unowned` as somewhat of an equivalent of a `weak` property that is implicitly unwrapped (though `unowned` has slight performance improvements on account of completely ignoring reference counting). Since we don't ever want to have implicit unwraps, we similarly don't want `unowned` properties.
 
 ```swift
 // PREFERRED
@@ -590,10 +590,10 @@ weak var parentViewController: UIViewController!
 unowned var parentViewController: UIViewController
 ```
 
-* **3.5.5** When unwrapping optionals, use the same name for the unwrapped variable where appropriate.
+* **3.5.5** When unwrapping optionals, use the same name for the unwrapped property where appropriate.
 
 ```
-guard let myVariable = myVariable else {
+guard let myProperty = myProperty else {
     return
 }
 ```
@@ -730,7 +730,7 @@ doSomething(1.0, success: { parameter1 in
 
 ### 3.9 Arrays
 
-* **3.9.1** In general, avoid accessing an array directly with subscripts. When possible, use accessors such as `.first` or `.last`, which are optional and won’t crash. Prefer using a `for item in items` syntax when possible as opposed to something like `for i in 0..<items.count`. If you need to access an array subscript directly, make sure to do proper bounds checking.
+* **3.9.1** In general, avoid accessing an array directly with subscripts. When possible, use accessors such as `.first` or `.last`, which are optional and won’t crash. Prefer using a `for item in items` syntax when possible as opposed to something like `for i in 0..<items.count`. If you need to access an array subscript directly, make sure to do proper bounds checking. You can use `for (index, value) in items.enumerate()` to get both the index and the value.
 
 * **3.9.2** Never use the `+=` or `+` operator to append/concatenate to arrays. Instead, use `.append()` or `.appendContentsOf()` as these are far more performant (at least with respect to compilation) in Swift's current state. If you are declaring an array that is based on other arrays and want to keep it immutable, instead of `let myNewArray = arr1 + arr2`, use `let myNewArray = [arr1, arr2].flatten()`.
 
@@ -948,7 +948,7 @@ guard let thingOne = thingOne else { return }
 
 ### 4.1 Documentation
 
-If a function is more complicated than a simple O(1) operation, you should generally consider adding a doc comment for the function since there could be some information that the method signature does not make immediately obvious (A very useful plugin to do this [called VVDocumenter can be found here](https://github.com/onevcat/VVDocumenter-Xcode)). If there are any quirks to the way that something was implemented, whether technically interesting, tricky, not obvious, etc., this should be documented. Documentation should be added for complex classes/structs/enums/protocols and properties. All `public` functions/classes/variables/constants/structs/enums/protocols/etc. should be documented as well (provided, again, that their signature/name does not make their meaning/functionality immediately obvious).
+If a function is more complicated than a simple O(1) operation, you should generally consider adding a doc comment for the function since there could be some information that the method signature does not make immediately obvious (A very useful plugin to do this [called VVDocumenter can be found here](https://github.com/onevcat/VVDocumenter-Xcode)). If there are any quirks to the way that something was implemented, whether technically interesting, tricky, not obvious, etc., this should be documented. Documentation should be added for complex classes/structs/enums/protocols and properties. All `public` functions/classes/properties/constants/structs/enums/protocols/etc. should be documented as well (provided, again, that their signature/name does not make their meaning/functionality immediately obvious).
 
 After writing a doc comment, you should option click the function/property/class/etc. to make sure that everything is formatted correctly.
 
