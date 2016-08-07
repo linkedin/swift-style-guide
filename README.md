@@ -4,7 +4,7 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Swift 2.2 on 08/06/2016.
+This guide was last updated for Swift 2.2 on August 7th, 2016.
 
 ## Table Of Contents
 
@@ -125,7 +125,7 @@ if myFirstValue > (mySecondValue + myThirdValue)
 ```swift
 someFunctionWithManyArguments(
     firstArgument: "Hello, I am a string",
-    secondArgument: resultFromSomeFunction()
+    secondArgument: resultFromSomeFunction(),
     thirdArgument: someOtherLocalProperty)
 ```
 
