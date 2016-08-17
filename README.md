@@ -4,7 +4,7 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Swift 2.2 on August 7th, 2016.
+This guide was last updated for Swift 2.2 on August 17th, 2016.
 
 ## Table Of Contents
 
@@ -374,7 +374,7 @@ let evenNumbers = [4, 8, 15, 16, 23, 42].filter { $0 % 2 == 0 }
 var evenNumbers: [Int] = []
 for integer in [4, 8, 15, 16, 23, 42] {
     if integer % 2 == 0 {
-        evenNumbers(integer)
+        evenNumbers.append(integer)
     }
 }
 ```
