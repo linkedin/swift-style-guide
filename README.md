@@ -4,7 +4,7 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Swift 2.2 on August 27th, 2016.
+This guide was last updated for Swift 2.2 on August 30th, 2016.
 
 ## Table Of Contents
 
@@ -472,6 +472,8 @@ do {
 * **3.1.14** Prefer `static` to `class` when declaring a function that is associated with a class as opposed to an instance of that class. Only use `class` if you specifically need the functionality of overriding that function in a subclass, though consider using a `protocol` to achieve this instead.
 
 * **3.1.15** If you have a function that takes no arguments, has no side effects, and returns some object or value, prefer using a computed property instead.
+
+* **3.1.16** For the purpose of namespacing a set of `static` functions and/or `static` computed properties, prefer using a caseless `enum` over a `class` or a `struct`. This way, you don't have to add a `private init() { }` to the container.
 
 ### 3.2 Access Modifiers
 
