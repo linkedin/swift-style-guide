@@ -4,7 +4,7 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Swift 2.2 on August 30th, 2016.
+This guide was last updated for Swift 2.2 on August 31st, 2016.
 
 ## Table Of Contents
 
@@ -469,7 +469,7 @@ do {
 }
 ```
 
-* **3.1.14** Prefer `static` to `class` when declaring a function that is associated with a class as opposed to an instance of that class. Only use `class` if you specifically need the functionality of overriding that function in a subclass, though consider using a `protocol` to achieve this instead.
+* **3.1.14** Prefer `static` to `class` when declaring a function or property that is associated with a class as opposed to an instance of that class. Only use `class` if you specifically need the functionality of overriding that function or property in a subclass, though consider using a `protocol` to achieve this instead.
 
 * **3.1.15** If you have a function that takes no arguments, has no side effects, and returns some object or value, prefer using a computed property instead.
 
@@ -650,16 +650,7 @@ var computedProperty: String {
 }
 ```
 
-* **3.7.4** Create class constants as `static` for any strings or constant values.
-
-```swift
-class MyTableViewCell: UITableViewCell {
-    static let kReuseIdentifier = String(MyTableViewCell)
-    static let kCellHeight: CGFloat = 80.0
-}
-```
-
-* **3.7.5** You can declare a singleton property as follows:
+* **3.7.4** You can declare a singleton property as follows:
 
 ```swift
 class PirateManager {
