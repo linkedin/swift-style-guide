@@ -473,7 +473,7 @@ do {
 
 * **3.1.15** If you have a function that takes no arguments, has no side effects, and returns some object or value, prefer using a computed property instead.
 
-* **3.1.16** For the purpose of namespacing a set of `static` functions and/or `static` computed properties, prefer using a caseless `enum` over a `class` or a `struct`. This way, you don't have to add a `private init() { }` to the container.
+* **3.1.16** For the purpose of namespacing a set of `static` functions and/or `static` properties, prefer using a caseless `enum` over a `class` or a `struct`. This way, you don't have to add a `private init() { }` to the container.
 
 ### 3.2 Access Modifiers
 
