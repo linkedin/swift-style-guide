@@ -958,7 +958,7 @@ Guidelines:
 
 * **4.1.3** Do not prefix each additional line with a `*`.
 
-* **4.1.4** Use the new `- parameter` syntax as opposed to the old `:param:` syntax (make sure to use lower case `parameter` and not `Parameter`).
+* **4.1.4** Use the new `- parameter` syntax as opposed to the old `:param:` syntax (make sure to use lower case `parameter` and not `Parameter`). See [the documentation on Swift Markup](https://developer.apple.com/library/watchos/documentation/Xcode/Reference/xcode_markup_formatting_ref/) for more details on how this is formatted.
 
 * **4.1.5** If you’re going to be documenting the parameters/returns/throws of a method, document all of them, even if some of the documentation ends up being somewhat repetitive (this is preferable to having the documentation look incomplete). Sometimes, if only a single parameter warrants documentation, it might be better to just mention it in the description instead.
 
