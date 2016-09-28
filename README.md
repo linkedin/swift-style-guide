@@ -631,21 +631,24 @@ var computedProperty: String {
 * **3.7.3** Though you can create a custom name for the new or old value for `willSet`/`didSet` and `set`, use the standard `newValue`/`oldValue` identifiers that are provided by default.
 
 ```swift
-var computedProperty: String {
-    get {
-        if someBool {
-            return "I'm a mighty pirate!"
-        }
-        return "I'm selling these fine leather jackets."
-    }
-    set {
-        computedProperty = newValue
-    }
+var storedProperty: String = "I'm selling these fine leather jackets." {
     willSet {
         print("will set to \(newValue)")
     }
     didSet {
-        print("did set from \(oldValue) to \(newValue)")
+        print("did set from \(oldValue) to \(storedProperty)")
+    }
+}
+
+var computedProperty: String  {
+    get {
+        if someBool {
+            return "I'm a mighty pirate!"
+        }
+        return storedProperty
+    }
+    set {
+        storedProperty = newValue
     }
 }
 ```
