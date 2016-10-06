@@ -4,7 +4,7 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Swift 2.2 on September 27th, 2016.
+This guide was last updated for Swift 3.0 on October 6th, 2016.
 
 ## Table Of Contents
 
@@ -64,7 +64,7 @@ let ninjaDictionary: [String: AnyObject] = [
 ]
 
 // declaring a function
-func myFunction<T, U: SomeProtocol where T.RelatedType == U>(firstArgument: U, secondArgument: T) {
+func myFunction<T, U: SomeProtocol>(firstArgument: U, secondArgument: T) where T.RelatedType == U {
     /* ... */
 }
 
@@ -187,20 +187,27 @@ class URLFinder {
 }
 ```
 
-* **2.5** Use `k` prefix + PascalCase for naming all static constants that are not singletons.
+* **2.5** All constants other than singletons that are instance-independent should be `static`. All such `static` constants should be placed in a container `enum` type as per rule **3.1.16**. The naming of this container should be singular (e.g. `Constant` and not `Constants`) and it should be named such that it is relatively obvious that it is a constant container. If this is not obvious, you can add a `Constant` suffix to the name. You should use these containers to group constants that have similar or the same prefixes, suffixes and/or use cases.
 
 ```swift
 class MyClassName {
-    // use `k` prefix for constant primitives
-    static let kSomeConstantHeight: CGFloat = 80.0
-
-    // use `k` prefix for non-primitives as well
-    static let kDeleteButtonColor = UIColor.redColor()
-
-    // don't use `k` prefix for singletons
+    // PREFERRED
+    enum AccessibilityIdentifier {
+        static let pirateButton = "pirate_button"
+    }
+    enum SillyMathConstant {
+        static let indianaPi = 3
+    }
     static let sharedInstance = MyClassName()
 
-    /* ... */
+    // NOT PREFERRED
+    static let kPirateButtonAccessibilityIdentifier = "pirate_button"
+    enum SillyMath {
+        static let indianaPi = 3
+    }
+    enum Singleton {
+        static let shared = MyClassName()
+    }
 }
 ```
 
@@ -257,7 +264,7 @@ class RoundAnimating: UIButton {
 class ConnectionTableViewCell: UITableViewCell {
     let personImageView: UIImageView
 
-    let animationDuration: NSTimeInterval
+    let animationDuration: TimeInterval
 
     // it is ok not to include string in the ivar name here because it's obvious
     // that it's a string from the property name
@@ -291,7 +298,7 @@ class ConnectionTableViewCell: UITableViewCell {
 
     // `animation` is not clearly a time interval
     // use `animationDuration` or `animationTimeInterval` instead
-    let animation: NSTimeInterval
+    let animation: TimeInterval
 
     // this is not obviously a `String`
     // use `transitionText` or `transitionString` instead
@@ -326,7 +333,7 @@ class ConnectionTableViewCell: UITableViewCell {
 ```swift
 // here, the name is a noun that describes what the protocol does
 protocol TableViewSectionProvider {
-    func rowHeight(atRow row: Int) -> CGFloat
+    func rowHeight(at row: Int) -> CGFloat
     var numberOfRows: Int { get }
     /* ... */
 }
@@ -395,10 +402,10 @@ let lastName = name.lastName
 
 * **3.1.5** Be wary of retain cycles when creating delegates/protocols for your classes; typically, these properties should be declared `weak`.
 
-* **3.1.6** Be careful when calling `self` directly from a closure as this can cause a retain cycle - use a [capture list](https://developer.apple.com/library/ios/documentation/swift/conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-XID_163) when this might be the case:
+* **3.1.6** Be careful when calling `self` directly from an escaping closure as this can cause a retain cycle - use a [capture list](https://developer.apple.com/library/ios/documentation/swift/conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-XID_163) when this might be the case:
 
 ```swift
-myFunctionWithClosure() { [weak self] (error) -> Void in
+myFunctionWithEscapingClosure() { [weak self] (error) -> Void in
     // you can do this
 
     self?.doSomething()
@@ -443,10 +450,10 @@ imageView.setImageWithURL(url, type: AsyncImageView.Type.person)
 
 ```swift
 // PREFERRED
-imageView.backgroundColor = UIColor.whiteColor()
+imageView.backgroundColor = UIColor.white
 
 // NOT PREFERRED
-imageView.backgroundColor = .whiteColor()
+imageView.backgroundColor = .white
 ```
 
 * **3.1.11** Prefer not writing `self.` unless it is required.
@@ -481,22 +488,22 @@ do {
 
 ```swift
 // PREFERRED
-private static let kMyPrivateNumber: Int
+private static let myPrivateNumber: Int
 
 // NOT PREFERRED
-static private let kMyPrivateNumber: Int
+static private let myPrivateNumber: Int
 ```
 
 * **3.2.2** The access modifier keyword should not be on a line by itself - keep it inline with what it is describing.
 
 ```swift
 // PREFERRED
-public class Pirate {
+open class Pirate {
     /* ... */
 }
 
 // NOT PREFERRED
-public
+open
 class Pirate {
     /* ... */
 }
@@ -513,6 +520,10 @@ class Pirate {
  */
 let pirateName = "LeChuck"
 ```
+
+* **3.2.5** Prefer `private` to `fileprivate` where possible.
+
+* **3.2.6** When choosing between `public` and `open`, prefer `open` if you intend for something to be subclassable outside of a given module and `public` otherwise. Note that anything `internal` and above can be subclassed in tests by using `@testable import`, so this shouldn't be a reason to use `open`. In general, lean towards being a bit more liberal with using `open` when it comes to libraries, but a bit more conservative when it comes to modules in a codebase such as an app where it is easy to change things in multiple modules simultaneously.
 
 ### 3.3 Custom Operators
 
@@ -556,7 +567,7 @@ func handleProblem(problem: Problem) {
 * **3.4.6** If you have a default case that shouldn't be reached, preferably throw an error (or handle it some other similar way such as asserting).
 
 ```swift
-func handleDigit(digit: Int) throws {
+func handleDigit(_ digit: Int) throws {
     case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9:
         print("Yes, \(digit) is a digit!")
     default:
@@ -682,24 +693,10 @@ doSomethingWithClosure() { response: NSURLResponse in
 [1, 2, 3].flatMap { String($0) }
 ```
 
-* **3.8.2** When listing parameters, if using a capture list and/or specifying a (non-void) return type, wrap the parameter list in parentheses. Otherwise, the parentheses can be avoided.
+* **3.8.2** If specifying a closure as a type, you don’t need to wrap it in parentheses unless it is required (e.g. if the type is optional or the closure is within another closure). Always wrap the arguments in the closure in a set of parentheses - use `()` to indicate no arguments and use `Void` to indicate that nothing is returned.
 
 ```swift
-// parentheses due to capture list
-doSomethingWithClosure() { [weak self] (response: NSURLResponse) in
-    self?.handleResponse(response)
-}
-
-// parentheses due to return type
-doSomethingWithClosure() { (response: NSURLResponse) -> String in
-    return String(response)
-}
-```
-
-* **3.8.3** If specifying a closure as a type, you don’t need to wrap it in parentheses unless it is required (e.g. if the type is optional or the closure is within another closure). Always wrap the arguments in the closure in a set of parentheses - use `()` to indicate no arguments and use `Void` to indicate that nothing is returned.
-
-```swift
-let completionBlock: (success: Bool) -> Void = {
+let completionBlock: (Bool) -> Void = { (success) in
     print("Success? \(success)")
 }
 
@@ -710,19 +707,20 @@ let completionBlock: () -> Void = {
 let completionBlock: (() -> Void)? = nil
 ```
 
-* **3.8.4** Keep parameter names on same line as the opening brace for closures when possible without too much horizontal overflow (i.e. ensure lines are less than 160 characters).
-* **3.8.5** Use trailing closure syntax unless the meaning of the closure is not obvious without the parameter name (an example of this could be if a method has parameters for success and failure closures).
+* **3.8.3** Keep parameter names on same line as the opening brace for closures when possible without too much horizontal overflow (i.e. ensure lines are less than 160 characters).
+
+* **3.8.4** Use trailing closure syntax unless the meaning of the closure is not obvious without the parameter name (an example of this could be if a method has parameters for success and failure closures).
 
 ```swift
 // trailing closure
-doSomething(1.0) { parameter1 in
+doSomething(1.0) { (parameter1) in
     print("Parameter 1 is \(parameter1)")
 }
 
 // no trailing closure
-doSomething(1.0, success: { parameter1 in
+doSomething(1.0, success: { (parameter1) in
     print("Success with \(parameter1)")
-}, failure: { parameter1 in
+}, failure: { (parameter1) in
     print("Failure with \(parameter1)")
 })
 ```
@@ -740,8 +738,8 @@ Suppose a function `myFunction` is supposed to return a `String`, however, at so
 Example:
 
 ```swift
-func readFile(withFilename filename: String) -> String? {
-    guard let file = openFile(filename) else {
+func readFile(named filename: String) -> String? {
+    guard let file = openFile(named: filename) else {
         return nil
     }
 
@@ -752,7 +750,7 @@ func readFile(withFilename filename: String) -> String? {
 
 func printSomeFile() {
     let filename = "somefile.txt"
-    guard let fileContents = readFile(filename) else {
+    guard let fileContents = readFile(named: filename) else {
         print("Unable to open file \(filename).")
         return
     }
@@ -762,10 +760,10 @@ func printSomeFile() {
 
 Instead, we should be using Swift's `try`/`catch` behavior when it is appropriate to know the reason for the failure.
 
-Use a `struct` such as the following:
+You can use a `struct` such as the following:
 
 ```swift
-struct Error: ErrorType {
+struct Error: Swift.Error {
     public let file: StaticString
     public let function: StaticString
     public let line: UInt
@@ -783,8 +781,8 @@ struct Error: ErrorType {
 Example usage:
 
 ```swift
-func readFile(withFilename filename: String) throws -> String {
-    guard let file = openFile(filename) else {
+func readFile(named filename: String) throws -> String {
+    guard let file = openFile(named: filename) else {
         throw Error(message: "Unable to open file named \(filename).")
     }
 
@@ -795,7 +793,7 @@ func readFile(withFilename filename: String) throws -> String {
 
 func printSomeFile() {
     do {
-        let fileContents = try readFile(filename)
+        let fileContents = try readFile(named: filename)
         print(fileContents)
     } catch {
         print(error)
@@ -813,7 +811,7 @@ In general, if a method can "fail", and the reason for the failure is not immedi
 
 ```swift
 // PREFERRED
-func eatDoughnut(atIndex index: Int) {
+func eatDoughnut(at index: Int) {
     guard index >= 0 && index < doughnuts else {
         // return early because the index is out of bounds
         return
@@ -824,7 +822,7 @@ func eatDoughnut(atIndex index: Int) {
 }
 
 // NOT PREFERRED
-func eatDoughnuts(atIndex index: Int) {
+func eatDoughnuts(at index: Int) {
     if index >= 0 && index < donuts.count {
         let doughnut = doughnuts[index]
         eat(doughnut)
@@ -839,21 +837,21 @@ func eatDoughnuts(atIndex index: Int) {
 guard let monkeyIsland = monkeyIsland else {
     return
 }
-bookVacation(onIsland: monkeyIsland)
-bragAboutVacation(onIsland: monkeyIsland)
+bookVacation(on: monkeyIsland)
+bragAboutVacation(at: monkeyIsland)
 
 // NOT PREFERRED
 if let monkeyIsland = monkeyIsland {
-    bookVacation(onIsland: monkeyIsland)
-    bragAboutVacation(onIsland: monkeyIsland)
+    bookVacation(on: monkeyIsland)
+    bragAboutVacation(at: monkeyIsland)
 }
 
 // EVEN LESS PREFERRED
 if monkeyIsland == nil {
     return
 }
-bookVacation(onIsland: monkeyIsland!)
-bragAboutVacation(onIsland: monkeyIsland!)
+bookVacation(on: monkeyIsland!)
+bragAboutVacation(at: monkeyIsland!)
 ```
 
 * **3.11.3** When deciding between using an `if` statement or a `guard` statement when unwrapping optionals is *not* involved, the most important thing to keep in mind is the readability of the code. There are many possible cases here, such as depending on two different booleans, a complicated logical statement involving multiple comparisons, etc., so in general, use your best judgement to write code that is readable and consistent. If you are unsure whether `guard` or `if` is more readable or they seem equally readable, prefer using `guard`.
