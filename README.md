@@ -568,10 +568,12 @@ func handleProblem(problem: Problem) {
 
 ```swift
 func handleDigit(_ digit: Int) throws {
+    switch digit {
     case 0, 1, 2, 3, 4, 5, 6, 7, 8, 9:
         print("Yes, \(digit) is a digit!")
     default:
         throw Error(message: "The given number was not a digit.")
+    }
 }
 ```
 
@@ -608,7 +610,7 @@ unowned var parentViewController: UIViewController
 
 * **3.5.5** When unwrapping optionals, use the same name for the unwrapped constant or variable where appropriate.
 
-```
+```swift
 guard let myValue = myValue else {
     return
 }
@@ -727,9 +729,9 @@ doSomething(1.0, success: { (parameter1) in
 
 ### 3.9 Arrays
 
-* **3.9.1** In general, avoid accessing an array directly with subscripts. When possible, use accessors such as `.first` or `.last`, which are optional and won’t crash. Prefer using a `for item in items` syntax when possible as opposed to something like `for i in 0..<items.count`. If you need to access an array subscript directly, make sure to do proper bounds checking. You can use `for (index, value) in items.enumerate()` to get both the index and the value.
+* **3.9.1** In general, avoid accessing an array directly with subscripts. When possible, use accessors such as `.first` or `.last`, which are optional and won’t crash. Prefer using a `for item in items` syntax when possible as opposed to something like `for i in 0 ..< items.count`. If you need to access an array subscript directly, make sure to do proper bounds checking. You can use `for (index, value) in items.enumerated()` to get both the index and the value.
 
-* **3.9.2** Never use the `+=` or `+` operator to append/concatenate to arrays. Instead, use `.append()` or `.appendContentsOf()` as these are far more performant (at least with respect to compilation) in Swift's current state. If you are declaring an array that is based on other arrays and want to keep it immutable, instead of `let myNewArray = arr1 + arr2`, use `let myNewArray = [arr1, arr2].flatten()`.
+* **3.9.2** Never use the `+=` or `+` operator to append/concatenate to arrays. Instead, use `.append()` or `.append(contentsOf:)` as these are far more performant (at least with respect to compilation) in Swift's current state. If you are declaring an array that is based on other arrays and want to keep it immutable, instead of `let myNewArray = arr1 + arr2`, use `let myNewArray = [arr1, arr2].flatten()`.
 
 ### 3.10 Error Handling
 
@@ -899,7 +901,7 @@ if let monkeyIsland = monkeyIsland {
     bookVacation(onIsland: monkeyIsland)
 }
 
-if let woodchuck = woodchuck where canChuckWood(woodchuck) {
+if let woodchuck = woodchuck, canChuckWood(woodchuck) {
     woodchuck.chuckWood()
 }
 ```
