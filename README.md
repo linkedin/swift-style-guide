@@ -198,7 +198,7 @@ class MyClassName {
     enum SillyMathConstant {
         static let indianaPi = 3
     }
-    static let sharedInstance = MyClassName()
+    static let shared = MyClassName()
 
     // NOT PREFERRED
     static let kPirateButtonAccessibilityIdentifier = "pirate_button"
@@ -670,7 +670,7 @@ var computedProperty: String  {
 
 ```swift
 class PirateManager {
-    static let sharedInstance = PirateManager()
+    static let shared = PirateManager()
 
     /* ... */
 }
