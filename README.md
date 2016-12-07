@@ -4,7 +4,7 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Swift 3.0 on October 6th, 2016.
+This guide was last updated for Swift 3.0 on December 7th, 2016.
 
 ## Table Of Contents
 
@@ -579,7 +579,7 @@ func handleDigit(_ digit: Int) throws {
 
 ### 3.5 Optionals
 
-* **3.5.1** The only time you should be using implicitly unwrapped optionals is with `@IBOutlet`s. In every other case, it is better to use a non-optional or regular optional property. Yes, there are cases in which you can probably "guarantee" that the property will never be `nil` when used, but it is better to be safe and consistent.
+* **3.5.1** The only time you should be using implicitly unwrapped optionals is with `@IBOutlet`s. In every other case, it is better to use a non-optional or regular optional property. Yes, there are cases in which you can probably "guarantee" that the property will never be `nil` when used, but it is better to be safe and consistent. Similarly, don't use force unwraps.
 
 * **3.5.2** Don't use `as!` or `try!`.
 
