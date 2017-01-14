@@ -814,7 +814,7 @@ In general, if a method can "fail", and the reason for the failure is not immedi
 ```swift
 // PREFERRED
 func eatDoughnut(at index: Int) {
-    guard index >= 0 && index < doughnuts else {
+    guard index >= 0 && index < doughnuts.count else {
         // return early because the index is out of bounds
         return
     }
@@ -824,8 +824,8 @@ func eatDoughnut(at index: Int) {
 }
 
 // NOT PREFERRED
-func eatDoughnuts(at index: Int) {
-    if index >= 0 && index < donuts.count {
+func eatDoughnut(at index: Int) {
+    if index >= 0 && index < doughnuts.count {
         let doughnut = doughnuts[index]
         eat(doughnut)
     }
