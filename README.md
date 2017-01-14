@@ -4,7 +4,7 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Swift 3.0 on December 7th, 2016.
+This guide was last updated for Swift 3.0 on January 14th, 2017.
 
 ## Table Of Contents
 
