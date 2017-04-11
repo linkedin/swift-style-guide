@@ -967,7 +967,7 @@ Guidelines:
 class Human {
     /**
      This method feeds a certain food to a person.
-     
+
      - parameter food: The food you want to be eaten.
      - parameter person: The person who should eat the food.
      - returns: True if the food was eaten by the person; false otherwise.
