@@ -166,6 +166,19 @@ if x == firstReallyReallyLongPredicateFunction()
 }
 ```
 
+* **1.13** Try to avoid to break a mathematical formula unless is necessary; in that case put the symbols always at the beginning of the new lines.
+```swift
+// PREFERRED
+let cellWidth = collectionView.bounds.size.width
+	+ flowLayout.sectionInset.right
+	+ flowLayout.sectionInset.left
+
+// NOT PREFERRED
+let cellWidth = collectionView.bounds.size.width +
+	flowLayout.sectionInset.right +
+	flowLayout.sectionInset.left
+```
+
 ## 2. Naming
 
 * **2.1** There is no need for Objective-C style prefixing in Swift (e.g. use just `GuybrushThreepwood` instead of `LIGuybrushThreepwood`).
@@ -330,6 +343,18 @@ protocol InputTextViewProtocol {
 }
 ```
 
+* **2.11** Use US English spelling to match Apple's API.
+
+```swift
+// PREFERRED
+let color = "red"
+
+// NOT PREFERRED
+let colour = "red"
+```
+
+* **2.12** Use the same name for identifiers and nib.
+
 ## 3. Coding Style
 
 ### 3.1 General
@@ -456,6 +481,19 @@ do {
 
 * **3.1.15** For the purpose of namespacing a set of `static` functions and/or `static` properties, prefer using a caseless `enum` over a `class` or a `struct`. This way, you don't have to add a `private init() { }` to the container.
 
+* **3.1.16** Prefer the shortcut versions of type declarations over the full generics syntax.
+```swift
+// PREFERRED
+var deviceModels: [String]
+var employees: [Int: String]
+var faxNumber: Int?
+
+// NOT PREFERRED
+var deviceModels: Array<String>
+var employees: Dictionary<Int, String>
+var faxNumber: Optional<Int>
+```
+
 ### 3.2 Access Modifiers
 
 * **3.2.1** Write the access modifier keyword first if it is needed.
@@ -498,6 +536,8 @@ let pirateName = "LeChuck"
 * **3.2.5** Prefer `private` to `fileprivate` where possible.
 
 * **3.2.6** When choosing between `public` and `open`, prefer `open` if you intend for something to be subclassable outside of a given module and `public` otherwise. Note that anything `internal` and above can be subclassed in tests by using `@testable import`, so this shouldn't be a reason to use `open`. In general, lean towards being a bit more liberal with using `open` when it comes to libraries, but a bit more conservative when it comes to modules in a codebase such as an app where it is easy to change things in multiple modules simultaneously.
+
+* **3.2.7** Try to make always `IBOutlet` as `private`.
 
 ### 3.3 Custom Operators
 
