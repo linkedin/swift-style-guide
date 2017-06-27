@@ -2,9 +2,9 @@
 
 Make sure to read [Apple's API Design Guidelines](https://swift.org/documentation/api-design-guidelines/).
 
-Specifics from these guidelines + additional remarks are mentioned below.
+This style guide is derived from [LinkedIn Swift style guide](https://github.com/linkedin/swift-style-guide), the most similar to our style and to what the iOS community is following. It is meant to outline the basic coding conventions of the Swift code written at Funding Circle.
 
-This guide was last updated for Swift 3.0 on January 14th, 2017.
+It should be considered a starting point, so suggestions and modifications are welcome.
 
 ## Table Of Contents
 
