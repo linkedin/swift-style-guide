@@ -30,7 +30,7 @@ It should be considered a starting point, so suggestions and modifications are w
 ## 1. Code Formatting
 
 * **1.1** Use 4 spaces for tabs.
-* **1.2** Avoid uncomfortably long lines with a hard maximum of 160 characters per line (Xcode->Preferences->Text Editing->Page guide at column: 120 is helpful for this)
+* **1.2** Avoid uncomfortably long lines with a hard maximum of 120 characters per line (Xcode->Preferences->Text Editing->Page guide at column: 120 is helpful for this)
 * **1.3** Ensure that there is a newline at the end of every file.
 * **1.4** Ensure that there is no trailing whitespace anywhere (Xcode->Preferences->Text Editing->Automatically trim trailing whitespace + Including whitespace-only lines).
 * **1.5** Do not place opening braces on new lines - we use the [1TBS style](https://en.m.wikipedia.org/wiki/Indent_style#Variant:_1TBS).
@@ -166,7 +166,7 @@ if x == firstReallyReallyLongPredicateFunction()
 }
 ```
 
-* **1.13** Try to avoid to break a mathematical formula unless is necessary; in that case put the symbols always at the beginning of the new lines.
+* **1.13** Try to avoid breaking a mathematic formula unless it is necessary; in that case, always put the symbols at the beginning of the new lines.
 ```swift
 // PREFERRED
 let cellWidth = collectionView.bounds.size.width
@@ -353,7 +353,7 @@ let color = "red"
 let colour = "red"
 ```
 
-* **2.12** Use the same name for identifiers and nib.
+* **2.12** Use the same names for identifiers and nibs.
 
 ## 3. Coding Style
 
@@ -389,7 +389,7 @@ for integer in [4, 8, 15, 16, 23, 42] {
 
 * **3.1.3** Prefer not declaring types for constants or variables if they can be inferred anyway.
 
-* **3.1.4** If a function returns multiple values, prefer returning a tuple to using `inout` arguments (it’s best to use labeled tuples for clarity on what you’re returning if it is not otherwise obvious). If you use a certain tuple more than once, consider using a `typealias`. If you’re returning 3 or more items in a tuple, consider using a `struct` or `class` instead or just split the method: remember to avoid if possible functions that return multiple values.
+* **3.1.4** If a function returns multiple values, prefer returning a tuple to using `inout` arguments (it’s best to use labeled tuples for clarity on what you’re returning if it is not otherwise obvious). If you use a certain tuple more than once, consider using a `typealias`. If you’re returning 3 or more items in a tuple, consider using a `struct` or `class` instead or just split the method: remember to avoid functions that return multiple values if possible.
 
 ```swift
 func pirateName() -> (firstName: String, lastName: String) {
@@ -537,7 +537,7 @@ let pirateName = "LeChuck"
 
 * **3.2.6** When choosing between `public` and `open`, prefer `open` if you intend for something to be subclassable outside of a given module and `public` otherwise. Note that anything `internal` and above can be subclassed in tests by using `@testable import`, so this shouldn't be a reason to use `open`. In general, lean towards being a bit more liberal with using `open` when it comes to libraries, but a bit more conservative when it comes to modules in a codebase such as an app where it is easy to change things in multiple modules simultaneously.
 
-* **3.2.7** Try to make always `IBOutlet` as `private`.
+* **3.2.7** `IBOutlet`s should be private by default. In case they must to be public, try to document why in the PR or in a comment in the code.
 
 ### 3.3 Custom Operators
 
@@ -635,7 +635,7 @@ guard let myValue = myValue else {
 When implementing protocols, there are two ways of organizing your code:
 
 1. Using `// MARK:` comments to separate your protocol implementation from the rest of your code
-2. Using an extension outside your `class`/`struct` implementation code, but in the same source file
+2. Using an extension outside your class/struct implementation code in the same source file. Consider extracting the extension to a separate file when it contains more than 50 lines of code.
 
 Keep in mind that when using an extension, however, the methods in the extension can't be overridden by a subclass, which can make testing difficult. If this is a common use case, it might be better to stick with method #1 for consistency. Otherwise, method #2 allows for cleaner separation of concerns.
 
