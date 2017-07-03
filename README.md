@@ -30,7 +30,7 @@ It should be considered a starting point, so suggestions and modifications are w
 ## 1. Code Formatting
 
 * **1.1** Use 4 spaces for tabs.
-* **1.2** Avoid uncomfortably long lines with a hard maximum of 120 characters per line (Xcode->Preferences->Text Editing->Page guide at column: 120 is helpful for this)
+* **1.2** Avoid uncomfortably long lines with a hard maximum of 120 characters per line, [the maximum number of characters per line considered safe to avoid scrolling in Github](https://stackoverflow.com/questions/22207920/what-is-githubs-character-limit-or-line-length-for-viewing-files-on-github). (Xcode->Preferences->Text Editing->Page guide at column: 120 is helpful for this)
 * **1.3** Ensure that there is a newline at the end of every file.
 * **1.4** Ensure that there is no trailing whitespace anywhere (Xcode->Preferences->Text Editing->Automatically trim trailing whitespace + Including whitespace-only lines).
 * **1.5** Do not place opening braces on new lines - we use the [1TBS style](https://en.m.wikipedia.org/wiki/Indent_style#Variant:_1TBS).
