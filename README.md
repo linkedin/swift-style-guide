@@ -2,9 +2,9 @@
 
 Make sure to read [Apple's API Design Guidelines](https://swift.org/documentation/api-design-guidelines/).
 
-Specifics from these guidelines + additional remarks are mentioned below.
+This style guide is derived from [LinkedIn Swift style guide](https://github.com/linkedin/swift-style-guide), the most similar to our style and to what the iOS community is following. It is meant to outline the basic coding conventions of the Swift code written at Funding Circle.
 
-This guide was last updated for Swift 3.0 on January 14th, 2017.
+It should be considered a starting point, so suggestions and modifications are welcome.
 
 ## Table Of Contents
 
@@ -30,7 +30,7 @@ This guide was last updated for Swift 3.0 on January 14th, 2017.
 ## 1. Code Formatting
 
 * **1.1** Use 4 spaces for tabs.
-* **1.2** Avoid uncomfortably long lines with a hard maximum of 160 characters per line (Xcode->Preferences->Text Editing->Page guide at column: 160 is helpful for this)
+* **1.2** Avoid uncomfortably long lines with a hard maximum of 120 characters per line (Xcode->Preferences->Text Editing->Page guide at column: 120 is helpful for this)
 * **1.3** Ensure that there is a newline at the end of every file.
 * **1.4** Ensure that there is no trailing whitespace anywhere (Xcode->Preferences->Text Editing->Automatically trim trailing whitespace + Including whitespace-only lines).
 * **1.5** Do not place opening braces on new lines - we use the [1TBS style](https://en.m.wikipedia.org/wiki/Indent_style#Variant:_1TBS).
@@ -166,6 +166,19 @@ if x == firstReallyReallyLongPredicateFunction()
 }
 ```
 
+* **1.13** Try to avoid breaking a mathematic formula unless it is necessary; in that case, always put the symbols at the beginning of the new lines.
+```swift
+// PREFERRED
+let cellWidth = collectionView.bounds.size.width
+	+ flowLayout.sectionInset.right
+	+ flowLayout.sectionInset.left
+
+// NOT PREFERRED
+let cellWidth = collectionView.bounds.size.width +
+	flowLayout.sectionInset.right +
+	flowLayout.sectionInset.left
+```
+
 ## 2. Naming
 
 * **2.1** There is no need for Objective-C style prefixing in Swift (e.g. use just `GuybrushThreepwood` instead of `LIGuybrushThreepwood`).
@@ -187,31 +200,7 @@ class URLFinder {
 }
 ```
 
-* **2.5** All constants other than singletons that are instance-independent should be `static`. All such `static` constants should be placed in a container `enum` type as per rule **3.1.16**. The naming of this container should be singular (e.g. `Constant` and not `Constants`) and it should be named such that it is relatively obvious that it is a constant container. If this is not obvious, you can add a `Constant` suffix to the name. You should use these containers to group constants that have similar or the same prefixes, suffixes and/or use cases.
-
-```swift
-class MyClassName {
-    // PREFERRED
-    enum AccessibilityIdentifier {
-        static let pirateButton = "pirate_button"
-    }
-    enum SillyMathConstant {
-        static let indianaPi = 3
-    }
-    static let shared = MyClassName()
-
-    // NOT PREFERRED
-    static let kPirateButtonAccessibilityIdentifier = "pirate_button"
-    enum SillyMath {
-        static let indianaPi = 3
-    }
-    enum Singleton {
-        static let shared = MyClassName()
-    }
-}
-```
-
-* **2.6** For generics and associated types, use either a single capital letter or a `PascalCase` word that describes the generic. If this word clashes with a protocol that it conforms to or a superclass that it subclasses, you can append a `Type` suffix to the associated type or generic name.
+* **2.5** For generics and associated types, use either a single capital letter or a `PascalCase` word that describes the generic. If this word clashes with a protocol that it conforms to or a superclass that it subclasses, you can append a `Type` suffix to the associated type or generic name.
 
 ```swift
 class SomeClass<T> { /* ... */ }
@@ -224,7 +213,7 @@ protocol Sequence {
 }
 ```
 
-* **2.7** Names should be descriptive and unambiguous.
+* **2.6** Names should be descriptive and unambiguous.
 
 ```swift
 // PREFERRED
@@ -234,7 +223,7 @@ class RoundAnimatingButton: UIButton { /* ... */ }
 class CustomButton: UIButton { /* ... */ }
 ```
 
-* **2.8** Do not abbreviate, use shortened names, or single letter names.
+* **2.7** Do not abbreviate, use shortened names, or single letter names.
 
 ```swift
 // PREFERRED
@@ -257,7 +246,7 @@ class RoundAnimating: UIButton {
 }
 ```
 
-* **2.9** Include type information in constant or variable names when it is not obvious otherwise.
+* **2.8** Include type information in constant or variable names when it is not obvious otherwise.
 
 ```swift
 // PREFERRED
@@ -326,9 +315,9 @@ class ConnectionTableViewCell: UITableViewCell {
 }
 ```
 
-* **2.10** When naming function arguments, make sure that the function can be read easily to understand the purpose of each argument.
+* **2.9** When naming function arguments, make sure that the function can be read easily to understand the purpose of each argument.
 
-* **2.11** As per [Apple's API Design Guidelines](https://swift.org/documentation/api-design-guidelines/), a `protocol` should be named as nouns if they describe what something is doing (e.g. `Collection`) and using the suffixes `able`, `ible`, or `ing` if it describes a capability (e.g. `Equatable`, `ProgressReporting`). If neither of those options makes sense for your use case, you can add a `Protocol` suffix to the protocol's name as well. Some example `protocol`s are below.
+* **2.10** As per [Apple's API Design Guidelines](https://swift.org/documentation/api-design-guidelines/), a `protocol` should be named as nouns if they describe what something is doing (e.g. `Collection`) and using the suffixes `able`, `ible`, or `ing` if it describes a capability (e.g. `Equatable`, `ProgressReporting`). If neither of those options makes sense for your use case, you can add a `Protocol` suffix to the protocol's name as well. Some example `protocol`s are below.
 
 ```swift
 // here, the name is a noun that describes what the protocol does
@@ -353,6 +342,18 @@ protocol InputTextViewProtocol {
     /* ... */
 }
 ```
+
+* **2.11** Use US English spelling to match Apple's API.
+
+```swift
+// PREFERRED
+let color = "red"
+
+// NOT PREFERRED
+let colour = "red"
+```
+
+* **2.12** Use the same names for identifiers and nibs.
 
 ## 3. Coding Style
 
@@ -388,7 +389,7 @@ for integer in [4, 8, 15, 16, 23, 42] {
 
 * **3.1.3** Prefer not declaring types for constants or variables if they can be inferred anyway.
 
-* **3.1.4** If a function returns multiple values, prefer returning a tuple to using `inout` arguments (it’s best to use labeled tuples for clarity on what you’re returning if it is not otherwise obvious). If you use a certain tuple more than once, consider using a `typealias`. If you’re returning 3 or more items in a tuple, consider using a `struct` or `class` instead.
+* **3.1.4** If a function returns multiple values, prefer returning a tuple to using `inout` arguments (it’s best to use labeled tuples for clarity on what you’re returning if it is not otherwise obvious). If you use a certain tuple more than once, consider using a `typealias`. If you’re returning 3 or more items in a tuple, consider using a `struct` or `class` instead or just split the method: remember to avoid functions that return multiple values if possible.
 
 ```swift
 func pirateName() -> (firstName: String, lastName: String) {
@@ -458,9 +459,7 @@ imageView.backgroundColor = .white
 
 * **3.1.11** Prefer not writing `self.` unless it is required.
 
-* **3.1.12** When writing methods, keep in mind whether the method is intended to be overridden or not. If not, mark it as `final`, though keep in mind that this will prevent the method from being overwritten for testing purposes. In general, `final` methods result in improved compilation times, so it is good to use this when applicable. Be particularly careful, however, when applying the `final` keyword in a library since it is non-trivial to change something to be non-`final` in a library as opposed to have changing something to be non-`final` in your local project.
-
-* **3.1.13** When using a statement such as `else`, `catch`, etc. that follows a block, put this keyword on the same line as the block. Again, we are following the [1TBS style](https://en.m.wikipedia.org/wiki/Indent_style#Variant:_1TBS) here. Example `if`/`else` and `do`/`catch` code is below.
+* **3.1.12** When using a statement such as `else`, `catch`, etc. that follows a block, put this keyword on the same line as the block. Again, we are following the [1TBS style](https://en.m.wikipedia.org/wiki/Indent_style#Variant:_1TBS) here. Example `if`/`else` and `do`/`catch` code is below.
 
 ```swift
 if someBoolean {
@@ -476,11 +475,24 @@ do {
 }
 ```
 
-* **3.1.14** Prefer `static` to `class` when declaring a function or property that is associated with a class as opposed to an instance of that class. Only use `class` if you specifically need the functionality of overriding that function or property in a subclass, though consider using a `protocol` to achieve this instead.
+* **3.1.13** Prefer `static` to `class` when declaring a function or property that is associated with a class as opposed to an instance of that class. Only use `class` if you specifically need the functionality of overriding that function or property in a subclass, though consider using a `protocol` to achieve this instead.
 
-* **3.1.15** If you have a function that takes no arguments, has no side effects, and returns some object or value, prefer using a computed property instead.
+* **3.1.14** If you have a function that takes no arguments, has no side effects, and returns some object or value, prefer using a computed property instead.
 
-* **3.1.16** For the purpose of namespacing a set of `static` functions and/or `static` properties, prefer using a caseless `enum` over a `class` or a `struct`. This way, you don't have to add a `private init() { }` to the container.
+* **3.1.15** For the purpose of namespacing a set of `static` functions and/or `static` properties, prefer using a caseless `enum` over a `class` or a `struct`. This way, you don't have to add a `private init() { }` to the container.
+
+* **3.1.16** Prefer the shortcut versions of type declarations over the full generics syntax.
+```swift
+// PREFERRED
+var deviceModels: [String]
+var employees: [Int: String]
+var faxNumber: Int?
+
+// NOT PREFERRED
+var deviceModels: Array<String>
+var employees: Dictionary<Int, String>
+var faxNumber: Optional<Int>
+```
 
 ### 3.2 Access Modifiers
 
@@ -524,6 +536,8 @@ let pirateName = "LeChuck"
 * **3.2.5** Prefer `private` to `fileprivate` where possible.
 
 * **3.2.6** When choosing between `public` and `open`, prefer `open` if you intend for something to be subclassable outside of a given module and `public` otherwise. Note that anything `internal` and above can be subclassed in tests by using `@testable import`, so this shouldn't be a reason to use `open`. In general, lean towards being a bit more liberal with using `open` when it comes to libraries, but a bit more conservative when it comes to modules in a codebase such as an app where it is easy to change things in multiple modules simultaneously.
+
+* **3.2.7** `IBOutlet`s should be private by default. In case they must to be public, try to document why in the PR or in a comment in the code.
 
 ### 3.3 Custom Operators
 
@@ -621,7 +635,7 @@ guard let myValue = myValue else {
 When implementing protocols, there are two ways of organizing your code:
 
 1. Using `// MARK:` comments to separate your protocol implementation from the rest of your code
-2. Using an extension outside your `class`/`struct` implementation code, but in the same source file
+2. Using an extension outside your class/struct implementation code in the same source file. Consider extracting the extension to a separate file when it contains more than 50 lines of code.
 
 Keep in mind that when using an extension, however, the methods in the extension can't be overridden by a subclass, which can make testing difficult. If this is a common use case, it might be better to stick with method #1 for consistency. Otherwise, method #2 allows for cleaner separation of concerns.
 
