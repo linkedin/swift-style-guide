@@ -387,7 +387,16 @@ for integer in [4, 8, 15, 16, 23, 42] {
 }
 ```
 
-* **3.1.3** Prefer not declaring types for constants or variables if they can be inferred anyway.
+* **3.1.3** Prefer not declaring types for constants or variables if they can be inferred anyway unless you have to declare an empty array or dictionary.
+```
+// PREFERRED
+var evenNumbers: [Int] = []
+var values: [String:Int] = [:]
+
+// NOT PREFERRED
+var evenNumbers = [Int]()
+var values = [String:Int]()
+```
 
 * **3.1.4** If a function returns multiple values, prefer returning a tuple to using `inout` arguments (it’s best to use labeled tuples for clarity on what you’re returning if it is not otherwise obvious). If you use a certain tuple more than once, consider using a `typealias`. If you’re returning 3 or more items in a tuple, consider using a `struct` or `class` instead or just split the method: remember to avoid functions that return multiple values if possible.
 
