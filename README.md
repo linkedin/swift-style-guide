@@ -51,7 +51,7 @@ class SomeClass {
 }
 ```
 
-* **1.6** When writing a type for a property, constant, variable, a key for a dictionary, a function argument, a protocol conformance, or a superclass, don't add a space before the colon.
+* **1.6** When writing a type for a property, constant, variable, a key for a dictionary, a function argument, a protocol conformance, or a superclass, don't add a space before the colon but only after.
 
 ```swift
 // specifying type
@@ -88,7 +88,7 @@ extension PirateViewController: UITableViewDataSource {
 let myArray = [1, 2, 3, 4, 5]
 ```
 
-* **1.8** There should be a space before and after a binary operator such as `+`, `==`, or `->`. There should also not be a space after a `(` and before a `)`.
+* **1.8** There should be a space before and after a binary operator such as `+`, `==`, or `->` and after every `:`. There should also not be a space after a `(` and before a `)`.
 
 ```swift
 let myValue = 20 + (30 / 2) * 3
@@ -643,7 +643,7 @@ guard let myValue = myValue else {
 
 When implementing protocols, there are two ways of organizing your code:
 
-1. Using `// MARK:` comments to separate your protocol implementation from the rest of your code
+1. Using `// MARK:` comments to separate your protocol implementation from the rest of your code; remember also to always add an extra empty line after it.
 2. Using an extension outside your class/struct implementation code in the same source file. Consider extracting the extension to a separate file when it contains more than 50 lines of code.
 
 Keep in mind that when using an extension, however, the methods in the extension can't be overridden by a subclass, which can make testing difficult. If this is a common use case, it might be better to stick with method #1 for consistency. Otherwise, method #2 allows for cleaner separation of concerns.
