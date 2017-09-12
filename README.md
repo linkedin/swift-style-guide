@@ -211,10 +211,9 @@ class MyClassName {
 }
 ```
 
-* **2.6** For generics and associated types, use either a single capital letter or a `PascalCase` word that describes the generic. If this word clashes with a protocol that it conforms to or a superclass that it subclasses, you can append a `Type` suffix to the associated type or generic name.
+* **2.6** For generics and associated types, use a `PascalCase` word that describes the generic. If this word clashes with a protocol that it conforms to or a superclass that it subclasses, you can append a `Type` suffix to the associated type or generic name.
 
 ```swift
-class SomeClass<T> { /* ... */ }
 class SomeClass<Model> { /* ... */ }
 protocol Modelable {
     associatedtype Model
