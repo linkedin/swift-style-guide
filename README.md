@@ -540,7 +540,7 @@ You can override existing operators to support new types (especially `==`). Howe
 
 * **3.4.3** The `case` statements should line up with the `switch` statement itself as per default Swift standards.
 
-* **3.4.4** When defining a case that has an associated value, make sure that this value is appropriately labeled as opposed to just types (e.g. `case Hunger(hungerLevel: Int)` instead of `case Hunger(Int)`).
+* **3.4.4** When defining a case that has an associated value, make sure that this value is appropriately labeled as opposed to just types (e.g. `case hunger(hungerLevel: Int)` instead of `case hunger(Int)`).
 
 ```swift
 enum Problem {
