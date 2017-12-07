@@ -106,15 +106,16 @@ func pancake(with syrup: Syrup) -> Pancake {
 // Xcode indentation for a function declaration that spans multiple lines
 func myFunctionWithManyParameters(parameterOne: String,
                                   parameterTwo: String,
-                                  parameterThree: String) {
+                                  parameterThree: String)
+{
     // Xcode indents to here for this kind of statement
     print("\(parameterOne) \(parameterTwo) \(parameterThree)")
 }
 
 // Xcode indentation for a multi-line `if` statement
 if myFirstValue > (mySecondValue + myThirdValue)
-    && myFourthValue == .someEnumValue {
-
+    && myFourthValue == .someEnumValue
+{
     // Xcode indents to here for this kind of statement
     print("Hello, World!")
 }
