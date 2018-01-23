@@ -4,7 +4,7 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Swift 3.0 on September 26th, 2017.
+This guide was last updated for Swift 4.0 on January 23, 2018.
 
 ## Table Of Contents
 
@@ -192,8 +192,8 @@ class URLFinder {
 ```swift
 class MyClassName {
     // PREFERRED
-    enum AccessibilityIdentifier {
-        static let pirateButton = "pirate_button"
+    enum Measurement {
+        static let buttonPadding: CGFloat = 20.0
     }
     enum SillyMathConstant {
         static let indianaPi = 3
@@ -201,7 +201,7 @@ class MyClassName {
     static let shared = MyClassName()
 
     // NOT PREFERRED
-    static let kPirateButtonAccessibilityIdentifier = "pirate_button"
+    static let kButtonPadding: CGFloat = 20.0
     enum SillyMath {
         static let indianaPi = 3
     }
