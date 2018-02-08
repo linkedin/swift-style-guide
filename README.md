@@ -185,9 +185,11 @@ let cellWidth = collectionView.bounds.size.width +
 
 * **2.2** Use `PascalCase` for type names (e.g. `struct`, `enum`, `class`, `typedef`, `associatedtype`, etc.).
 
-* **2.3** Use `camelCase` (initial lowercase letter) for function, method, property, constant, variable, argument names, enum cases, etc.).
+* **2.3** When extending a class in Swift to avoid writing more Objective-C then the name of the class should be 'ClassName.swift' (e.g. use `UKUserViewModel.swift` instead of `UKUserViewModel+Extensions.swift`). But when extending a class to conform to a protocol/helpers/functionality ect then the name should follow this pattern: 'ClassName+ExtensionPurpose.swift' (e.g. use `UKUserViewModel+Helpers.swift` instead of `UKUserViewModelHelpers.swift`).
 
-* **2.4** When dealing with an acronym or other name that is usually written in all caps, actually use all caps in any names that use this in code. The exception is if this word is at the start of a name that needs to start with lowercase - in this case, use all lowercase for the acronym.
+* **2.4** Use `camelCase` (initial lowercase letter) for function, method, property, constant, variable, argument names, enum cases, etc.).
+
+* **2.5** When dealing with an acronym or other name that is usually written in all caps, actually use all caps in any names that use this in code. The exception is if this word is at the start of a name that needs to start with lowercase - in this case, use all lowercase for the acronym.
 
 ```swift
 // "HTML" is at the start of a constant name, so we use lowercase "html"
@@ -200,7 +202,7 @@ class URLFinder {
 }
 ```
 
-* **2.5** For generics and associated types, use either a single capital letter or a `PascalCase` word that describes the generic. If this word clashes with a protocol that it conforms to or a superclass that it subclasses, you can append a `Type` suffix to the associated type or generic name.
+* **2.6** For generics and associated types, use either a single capital letter or a `PascalCase` word that describes the generic. If this word clashes with a protocol that it conforms to or a superclass that it subclasses, you can append a `Type` suffix to the associated type or generic name.
 
 ```swift
 class SomeClass<T> { /* ... */ }
@@ -213,7 +215,7 @@ protocol Sequence {
 }
 ```
 
-* **2.6** Names should be descriptive and unambiguous.
+* **2.7** Names should be descriptive and unambiguous.
 
 ```swift
 // PREFERRED
@@ -223,7 +225,7 @@ class RoundAnimatingButton: UIButton { /* ... */ }
 class CustomButton: UIButton { /* ... */ }
 ```
 
-* **2.7** Do not abbreviate, use shortened names, or single letter names.
+* **2.8** Do not abbreviate, use shortened names, or single letter names.
 
 ```swift
 // PREFERRED
@@ -246,7 +248,7 @@ class RoundAnimating: UIButton {
 }
 ```
 
-* **2.8** Include type information in constant or variable names when it is not obvious otherwise.
+* **2.9** Include type information in constant or variable names when it is not obvious otherwise.
 
 ```swift
 // PREFERRED
@@ -315,9 +317,9 @@ class ConnectionTableViewCell: UITableViewCell {
 }
 ```
 
-* **2.9** When naming function arguments, make sure that the function can be read easily to understand the purpose of each argument.
+* **2.10** When naming function arguments, make sure that the function can be read easily to understand the purpose of each argument.
 
-* **2.10** As per [Apple's API Design Guidelines](https://swift.org/documentation/api-design-guidelines/), a `protocol` should be named as nouns if they describe what something is doing (e.g. `Collection`) and using the suffixes `able`, `ible`, or `ing` if it describes a capability (e.g. `Equatable`, `ProgressReporting`). If neither of those options makes sense for your use case, you can add a `Protocol` suffix to the protocol's name as well. Some example `protocol`s are below.
+* **2.11** As per [Apple's API Design Guidelines](https://swift.org/documentation/api-design-guidelines/), a `protocol` should be named as nouns if they describe what something is doing (e.g. `Collection`) and using the suffixes `able`, `ible`, or `ing` if it describes a capability (e.g. `Equatable`, `ProgressReporting`). If neither of those options makes sense for your use case, you can add a `Protocol` suffix to the protocol's name as well. Some example `protocol`s are below.
 
 ```swift
 // here, the name is a noun that describes what the protocol does
@@ -343,7 +345,7 @@ protocol InputTextViewProtocol {
 }
 ```
 
-* **2.11** Use US English spelling to match Apple's API.
+* **2.12** Use US English spelling to match Apple's API.
 
 ```swift
 // PREFERRED
@@ -353,7 +355,7 @@ let color = "red"
 let colour = "red"
 ```
 
-* **2.12** Use the same names for identifiers and nibs.
+* **2.13** Use the same names for identifiers and nibs.
 
 ## 3. Coding Style
 
