@@ -185,7 +185,7 @@ let cellWidth = collectionView.bounds.size.width +
 
 * **2.2** Use `PascalCase` for type names (e.g. `struct`, `enum`, `class`, `typedef`, `associatedtype`, etc.).
 
-* **2.3** When extending a class in Swift to avoid writing more Objective-C then the name of the class should be 'ClassName.swift' (e.g. use `UKUserViewModel.swift` instead of `UKUserViewModel+Extensions.swift`). But when extending a class to conform to a protocol/helpers/functionality ect then the name should follow this pattern: 'ClassName+ExtensionPurpose.swift' (e.g. use `UKUserViewModel+Helpers.swift` instead of `UKUserViewModelHelpers.swift`).
+* **2.3** When extending a class in Swift to avoid writing more Objective-C then the name of the class should be 'ClassName.swift' (e.g. use `UKUserViewModel.swift` instead of `UKUserViewModel+Extensions.swift`). But when extending a class to conform to a protocol/helpers/functionality etc. then the name should follow this pattern: 'ClassName+ExtensionPurpose.swift' (e.g. use `UKUserViewModel+Helpers.swift` instead of `UKUserViewModelHelpers.swift`).
 
 * **2.4** Use `camelCase` (initial lowercase letter) for function, method, property, constant, variable, argument names, enum cases, etc.).
 
