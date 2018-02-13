@@ -170,9 +170,9 @@ if x == firstReallyReallyLongPredicateFunction()
 
 * **2.1** There is no need for Objective-C style prefixing in Swift (e.g. use just `GuybrushThreepwood` instead of `LIGuybrushThreepwood`).
 
-* **2.2** Use `PascalCase` for type names (e.g. `struct`, `enum`, `class`, `typedef`, `associatedtype`, etc.) and class-level constants.
+* **2.2** Use `PascalCase` for type names (e.g. `struct`, `enum`, `class`, `typedef`, `associatedtype`, etc.).
 
-* **2.3** Use `camelCase` (initial lowercase letter) for function, method, property, local constant, variable, argument names, enum cases, etc.
+* **2.3** Use `camelCase` (initial lowercase letter) for function, method, property, constant, variable, argument names, enum cases, etc.
 
 * **2.4** When dealing with an acronym or other name that is usually written in all caps, actually use all caps in any names that use this in code. The exception is if this word is at the start of a name that needs to start with lowercase - in this case, use all lowercase for the acronym.
 
@@ -193,9 +193,9 @@ class URLFinder {
 // PREFERRED    
 class MyClassName {
     // MARK: - Constants
-    static let ButtonPadding: CGFloat = 20.0
-    static let IndianaPi = 3
-    static let Shared = MyClassName()
+    static let buttonPadding: CGFloat = 20.0
+    static let indianaPi = 3
+    static let shared = MyClassName()
 }
 
 // NOT PREFERRED
