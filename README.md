@@ -4,7 +4,7 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Constants Container changes on February 13, 2018.
+This guide was last updated for Swift 4.0 on February 14, 2018.
 
 ## Table Of Contents
 
