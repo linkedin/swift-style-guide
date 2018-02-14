@@ -4,7 +4,7 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Swift 4.0 on January 23, 2018.
+This guide was last updated for Swift 4.0 on February 14, 2018.
 
 ## Table Of Contents
 
@@ -172,7 +172,7 @@ if x == firstReallyReallyLongPredicateFunction()
 
 * **2.2** Use `PascalCase` for type names (e.g. `struct`, `enum`, `class`, `typedef`, `associatedtype`, etc.).
 
-* **2.3** Use `camelCase` (initial lowercase letter) for function, method, property, constant, variable, argument names, enum cases, etc.).
+* **2.3** Use `camelCase` (initial lowercase letter) for function, method, property, constant, variable, argument names, enum cases, etc.
 
 * **2.4** When dealing with an acronym or other name that is usually written in all caps, actually use all caps in any names that use this in code. The exception is if this word is at the start of a name that needs to start with lowercase - in this case, use all lowercase for the acronym.
 
@@ -187,26 +187,25 @@ class URLFinder {
 }
 ```
 
-* **2.5** All constants other than singletons that are instance-independent should be `static`. All such `static` constants should be placed in a container `enum` type as per rule **3.1.16**. The naming of this container should be singular (e.g. `Constant` and not `Constants`) and it should be named such that it is relatively obvious that it is a constant container. If this is not obvious, you can add a `Constant` suffix to the name. You should use these containers to group constants that have similar or the same prefixes, suffixes and/or use cases.
+* **2.5** All constants that are instance-independent should be `static`. All such `static` constants should be placed in a marked section of their `class`, `struct`, or `enum`. For classes with many constants, you should group constants that have similar or the same prefixes, suffixes and/or use cases.
 
 ```swift
+// PREFERRED    
 class MyClassName {
-    // PREFERRED
-    enum Measurement {
-        static let buttonPadding: CGFloat = 20.0
-    }
-    enum SillyMathConstant {
-        static let indianaPi = 3
-    }
+    // MARK: - Constants
+    static let buttonPadding: CGFloat = 20.0
+    static let indianaPi = 3
     static let shared = MyClassName()
+}
 
-    // NOT PREFERRED
+// NOT PREFERRED
+class MyClassName {
+    // Don't use `k`-prefix
     static let kButtonPadding: CGFloat = 20.0
-    enum SillyMath {
+
+    // Don't namespace constants
+    enum Constant {
         static let indianaPi = 3
-    }
-    enum Singleton {
-        static let shared = MyClassName()
     }
 }
 ```
@@ -478,8 +477,6 @@ do {
 * **3.1.14** Prefer `static` to `class` when declaring a function or property that is associated with a class as opposed to an instance of that class. Only use `class` if you specifically need the functionality of overriding that function or property in a subclass, though consider using a `protocol` to achieve this instead.
 
 * **3.1.15** If you have a function that takes no arguments, has no side effects, and returns some object or value, prefer using a computed property instead.
-
-* **3.1.16** For the purpose of namespacing a set of `static` functions and/or `static` properties, prefer using a caseless `enum` over a `class` or a `struct`. This way, you don't have to add a `private init() { }` to the container.
 
 ### 3.2 Access Modifiers
 
