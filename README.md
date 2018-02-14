@@ -4,7 +4,7 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Swift 4.0 on January 23, 2018.
+This guide was last updated for Constants Container changes on February 13, 2018.
 
 ## Table Of Contents
 
@@ -187,7 +187,7 @@ class URLFinder {
 }
 ```
 
-* **2.5** All constants other than singletons that are instance-independent should be `static`. All such `static` constants should be placed in a marked section of their class, struct, or enum. For classes with many constants, you should group constants that have similar or the same prefixes, suffixes and/or use cases.
+* **2.5** All constants other than singletons that are instance-independent should be `static`. All such `static` constants should be placed in a marked section of their `class`, `struct`, or `enum`. For classes with many constants, you should group constants that have similar or the same prefixes, suffixes and/or use cases.
 
 ```swift
 // PREFERRED    
