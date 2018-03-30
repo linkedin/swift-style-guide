@@ -194,7 +194,7 @@ For configuration classes with many constants, you should group constants that h
 
 // PREFERRED
 class MyClassNameOptions {
-    let buttonPadding: CGFloat = 20.0
+    let buttonPadding: CGFloat
     let indianaPi: Int
     
     init(buttonPadding: CGFloat = 20.0, 
