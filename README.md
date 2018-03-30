@@ -187,15 +187,36 @@ class URLFinder {
 }
 ```
 
-* **2.5** All constants that are instance-independent should be `static`. All such `static` constants should be placed in a marked section of their `class`, `struct`, or `enum`. For classes with many constants, you should group constants that have similar or the same prefixes, suffixes and/or use cases.
+* **2.5** Use configuration classes instead of class constants and pass them as constructor dependency injection. All properties of configuration classes must be immutable and have default values in constructor. It helps to reuse classes without code modification.
+For configuration classes with many constants, you should group constants that have similar or the same prefixes, suffixes and/or use cases as inline classes.
 
 ```swift
-// PREFERRED    
+
+// PREFERRED
+class MyClassNameOptions {
+    let buttonPadding: CGFloat = 20.0
+    let indianaPi: Int
+    
+    init(buttonPadding: CGFloat = 20.0, 
+         indianaPi: Int = 3) {
+        self.buttonPadding = buttonPadding
+        self.indianaPi = indianaPi
+    }
+}
+
+class MyClassName {
+    private let options MyClassNameOptions
+    init(options: MyClassNameOptions = MyClassNameOptions()) {
+        self.options = options
+    }
+}
+
+
+// NOT PREFERRED    
 class MyClassName {
     // MARK: - Constants
     static let buttonPadding: CGFloat = 20.0
     static let indianaPi = 3
-    static let shared = MyClassName()
 }
 
 // NOT PREFERRED
