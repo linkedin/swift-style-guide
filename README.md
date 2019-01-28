@@ -412,10 +412,6 @@ myFunctionWithEscapingClosure() { [weak self] in
 
     self.doSomething()
     
-    // you can do this
-    
-    self?.doSomething()
-
     // NOT PREFERRED
     guard let strongSelf = self else {
         return
