@@ -403,13 +403,16 @@ let lastName = name.lastName
 * **3.1.6** Be careful when calling `self` directly from an escaping closure as this can cause a retain cycle - use a [capture list](https://developer.apple.com/library/ios/documentation/swift/conceptual/Swift_Programming_Language/Closures.html#//apple_ref/doc/uid/TP40014097-CH11-XID_163) when this might be the case:
 
 ```swift
-myFunctionWithEscapingClosure() { [weak self] (error) -> Void in
-    // you can do this
+myFunctionWithEscapingClosure() { [weak self] in
+    // PREFERRED
+    guard let self = self else {
+        debugPrint("What happened? You lost self...")
+        return
+    }
 
-    self?.doSomething()
-
-    // or you can do this
-
+    self.doSomething()
+    
+    // NOT PREFERRED
     guard let strongSelf = self else {
         return
     }
