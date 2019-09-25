@@ -26,9 +26,6 @@ It should be considered a starting point, so suggestions and modifications are w
     - [4. Documentation/Comments](#4-documentationcomments)
         - [4.1 Documentation](#41-documentation)
         - [4.2 Other Commenting Guidelines](#42-other-commenting-guidelines)
-    - [5. Writing Tests](#5-writing-tests)
-    	- [5.1 Unit Tests](#51-unit-tests)
-    	- [5.2 UI Tests](#52-ui-tests)
 
 ## 1. Code Formatting
 
