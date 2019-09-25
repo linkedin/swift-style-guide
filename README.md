@@ -26,6 +26,9 @@ It should be considered a starting point, so suggestions and modifications are w
     - [4. Documentation/Comments](#4-documentationcomments)
         - [4.1 Documentation](#41-documentation)
         - [4.2 Other Commenting Guidelines](#42-other-commenting-guidelines)
+    - [5. Writing Tests](#5-writing-tests)
+        - [5.1 Unit Tests](#51-unit-tests)
+        - [5.2 UI Tests](#52-ui-tests)
 
 ## 1. Code Formatting
 
@@ -1074,3 +1077,117 @@ class Pirate {
 }
 ```
 
+### 5. Writing Tests
+
+We write our tests using behavior-driven testing(BDD). BDD encourages writing tests in a more natural way to allow for the creation of more readable unit tests for both programmers and non programmers. Unit tests should be written as scenarios which a clear description of what that test is doing, what setup is required and what results are expected
+
+
+### 5.1 Unit Tests
+
+
+* **5.1.1** Describe blocks should be used to separate out different scenarios you are testing. If that scenario requires different configurations in order to fully test that scenario, then those configurations should be placed inside separate contexts to make your test more readable
+
+```swift
+// PREFERRED 
+describe(applicationStatus) {
+context("when application status is accepted") {
+it("returns accepted") { /* ... */ {
+
+context("when application status is rejected") { 
+it("returns rejected") { /* ... */ }
+
+// NOT PREFERRED
+describe("when application status is accepted") { /* ... */  }
+
+describe("when application status is rejected") { /* ... */ }
+
+```
+
+* **5.1.2** The results your test expects should be declared in the describe or context block to make it clear what you are testing
+
+```swift
+// PREFERRED
+describe("fetchData")
+let results: [String]?
+
+it("returns results") { /* ... */ }
+
+// NOT PREFFERED
+describe("fetchData") { 
+it("returns results") { 
+let results: [String]?
+}
+}
+```
+
+
+* **5.1.3** If your unit test requires some sort of setup in order to test your result, that setup should be done in the beforeEach.
+
+```swift
+// PREFERRED
+beforeEach {
+service.fetchUser() 
+} 
+
+it("returns user") { /* ... */ }
+
+// NOT PREFFERED
+it("returns user") {
+beforeEach {
+service.fetchUser() 
+}
+/* ... */
+}
+```
+
+* **5.1.4** It is better to split your test results into multiple it statements rather than one large it statement. This makes it easier to figure out exactly which part of your test failed
+
+```swift
+// PREFERRED
+context("given the AccountType of .isa") {
+it("sets the title correctly") { /* ... */ }
+
+it("sets the description correctly") { /* ... */ }
+
+// NOT PREFERRED
+it("sets account information correctly") { 
+expect(titleLabel.text).toEqual(title)
+expect(descriptionLabel.text).toEqual(description)
+}
+```
+
+* **5.1.5** When dealing with code that returns an optional value, in the it statement, use force unwrapped so test will crash. We want to know straight if there is something wrong rather than waiting for all the tests to finish.
+
+```swift
+// PREFERRED
+it("returns data") { 
+expect(results!.count).toEqual(2)
+}
+
+// NOT PREFERRED
+it("returns data") { 
+expect(results?.count).toEqual(2)
+}
+```
+
+
+### 5.2 UI Tests
+
+
+* **5.2.1**: When writing UI tests, you should include an example description of what the view should look like.
+
+```swift
+describe("ExampleViewController") {
+
+context("content") {
+it("""
+shows the example view:
+______________________________________
+|                                    |
+| Title                              |
+| Description                        |
+|____________________________________|
+"""
+)
+}
+```
