@@ -582,7 +582,7 @@ func handleDigit(_ digit: Int) throws {
 * **3.5.3** If you don't plan on actually using the value stored in an optional, but need to determine whether or not this value is `nil`, explicitly check this value against `nil` as opposed to using `if let` syntax.
 
 ```swift
-// PREFERERED
+// PREFERRED
 if someOptional != nil {
     // do something
 }
@@ -609,6 +609,25 @@ unowned var parentViewController: UIViewController
 ```swift
 guard let myValue = myValue else {
     return
+}
+```
+
+* **3.5.6** Use `XCTUnwrap` instead of forced unwrapping in tests.
+```swift
+func isEvenNumber(_ number: Int) -> Bool {
+    return number % 2 == 0
+}
+
+// PREFERRED
+func testWithXCTUnwrap() throws {
+    let number: Int? = functionThatReturnsOptionalNumber()
+    XCTAssertTrue(isEvenNumber(try XCTUnwrap(number)))
+}
+
+// NOT PREFERRED
+func testWithForcedUnwrap() {
+    let number: Int? = functionThatReturnsOptionalNumber()
+    XCTAssertTrue(isEvenNumber(number!)) // may crash the simulator
 }
 ```
 
