@@ -33,7 +33,7 @@ This guide was last updated for Swift 4.0 on February 14, 2018.
 * **1.2** Avoid uncomfortably long lines with a hard maximum of 160 characters per line (Xcode->Preferences->Text Editing->Page guide at column: 160 is helpful for this)
 * **1.3** Ensure that there is a newline at the end of every file.
 * **1.4** Ensure that there is no trailing whitespace anywhere (Xcode->Preferences->Text Editing->Automatically trim trailing whitespace + Including whitespace-only lines).
-* **1.5** For single-line statements, keep the opening braces on the same line. For multi-line statements, place the closing parentheses and opening braces on separate lines. This adheres to the default style defined by swift-format.
+* **1.5** For single-line statements, keep the opening braces on the same line. For multi-line statements, place the closing parentheses and opening braces on separate lines. This adheres to the default style defined by [swift-format](https://github.com/swiftlang/swift-format).
 
 ```swift
 class SomeClass {
