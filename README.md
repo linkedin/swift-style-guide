@@ -33,11 +33,12 @@ This guide was last updated for Swift 4.0 on February 14, 2018.
 * **1.2** Avoid uncomfortably long lines with a hard maximum of 160 characters per line (Xcode->Preferences->Text Editing->Page guide at column: 160 is helpful for this)
 * **1.3** Ensure that there is a newline at the end of every file.
 * **1.4** Ensure that there is no trailing whitespace anywhere (Xcode->Preferences->Text Editing->Automatically trim trailing whitespace + Including whitespace-only lines).
-* **1.5** Do not place opening braces on new lines - we use the [1TBS style](https://en.m.wikipedia.org/wiki/Indentation_style#1TBS).
+* **1.5** For single-line statements, keep the opening braces on the same line. For multi-line statements, place the closing parentheses and opening braces on separate lines. This adheres to the default style defined by [swift-format](https://github.com/swiftlang/swift-format).
 
 ```swift
 class SomeClass {
-    func someMethod() {
+    // For single-line statements, keep the opening braces on the same line.
+    func someMethod(firstArgument: String, secondArgument: String) -> String {
         if x == y {
             /* ... */
         } else if x == z {
@@ -45,9 +46,34 @@ class SomeClass {
         } else {
             /* ... */
         }
+        guard let firstInt = firstArgument.intValue else {
+            return "..."
+        }
+        return "..."
     }
 
-    /* ... */
+    // For multi-line statements, place the closing parentheses and opening braces on separate lines.
+    func anotherMethod(
+        firstArgument: String,
+        ...
+        lastArgument: String
+    ) -> String {
+        if let firstInt = firstArgument.intValue,
+            ...,
+            let lastInt = lastArgument.doubleValue
+        {
+            /* ... */
+        } else {
+            /* ... */
+        }
+        guard let firstInt = firstArgument.intValue,
+            ...,
+            let lastInt = lastArgument.doubleValue
+        else {
+            return "..."
+        }
+        return "..."
+    }
 }
 ```
 
@@ -100,21 +126,23 @@ func pancake(with syrup: Syrup) -> Pancake {
 }
 ```
 
-* **1.9** We follow Xcode's recommended indentation style (i.e. your code should not change if CTRL-I is pressed). When declaring a function that spans multiple lines, prefer using that syntax to which Xcode, as of version 7.3, defaults.
+* **1.9** We follow Xcode's recommended indentation style (i.e. your code should not change if CTRL-I is pressed). For multi-line function declarations, use the syntax that [swift-format](https://github.com/swiftlang/swift-format) defaults to in Xcode 16.0 or later.
 
 ```swift
-// Xcode indentation for a function declaration that spans multiple lines
-func myFunctionWithManyParameters(parameterOne: String,
-                                  parameterTwo: String,
-                                  parameterThree: String) {
+// Swift-format indentation for a function declaration that spans multiple lines
+func myFunctionWithManyParameters(
+    parameterOne: String,
+    parameterTwo: String,
+    parameterThree: String
+) {
     // Xcode indents to here for this kind of statement
     print("\(parameterOne) \(parameterTwo) \(parameterThree)")
 }
 
-// Xcode indentation for a multi-line `if` statement
+// Swift-format indentation for a multi-line `if` statement
 if myFirstValue > (mySecondValue + myThirdValue)
-    && myFourthValue == .someEnumValue {
-
+    && myFourthValue == .someEnumValue
+{
     // Xcode indents to here for this kind of statement
     print("Hello, World!")
 }
@@ -136,11 +164,11 @@ someFunctionWithABunchOfArguments(
     someStringArgument: "hello I am a string",
     someArrayArgument: [
         "dadada daaaa daaaa dadada daaaa daaaa dadada daaaa daaaa",
-        "string one is crazy - what is it thinking?"
+        "string one is crazy - what is it thinking?",
     ],
     someDictionaryArgument: [
         "dictionary key 1": "some value 1, but also some more text here",
-        "dictionary key 2": "some value 2"
+        "dictionary key 2": "some value 2",
     ],
     someClosure: { parameter1 in
         print(parameter1)
@@ -161,7 +189,8 @@ if firstCondition && secondCondition && thirdCondition {
 // NOT PREFERRED
 if x == firstReallyReallyLongPredicateFunction()
     && y == secondReallyReallyLongPredicateFunction()
-    && z == thirdReallyReallyLongPredicateFunction() {
+    && z == thirdReallyReallyLongPredicateFunction()
+{
     // do something
 }
 ```
@@ -927,7 +956,8 @@ if let woodchuck = woodchuck, canChuckWood(woodchuck) {
 // combined because we just return
 guard let thingOne = thingOne,
     let thingTwo = thingTwo,
-    let thingThree = thingThree else {
+    let thingThree = thingThree
+else {
     return
 }
 
